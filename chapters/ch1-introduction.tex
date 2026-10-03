@@ -25,10 +25,36 @@ The main objective of this project is to develop a web-based bus ticket booking 
 
 The specific objectives are:
 \begin{enumerate}
-  \item To develop a search module that lets passengers find buses by origin, destination, and travel date, and sort the results by price or departure time.
-  \item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
-  \item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
-  \item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
-  \item To implement a booking and cancellation workflow with a simulated payment step, designed so a real payment gateway can be integrated later.
-  \item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+	\item To develop a search module that lets passengers find buses by origin, destination, and travel date, and sort the results by price or departure time.
+	\item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
+	\item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
+	\item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
+	\item To implement a booking and cancellation workflow with a simulated payment step, designed so a real payment gateway can be integrated later.
+	\item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+\end{enumerate}
+
+% ---- 1.4 ----
+\section{Scope}
+
+The scope of this project covers the design and development of a web-based bus ticket booking system for long-distance routes in Nepal. The system is a responsive web application for desktop and mobile browsers and includes the following:
+\begin{enumerate}
+	\item Three user roles (passengers, bus operators, and administrators) with registration, login, secure password storage, and role-based access.
+	\item Management of routes, buses, schedules, and fares by operators and administrators.
+	\item Searching for buses by origin, destination, and travel date, with results sorted by price or departure time.
+	\item A visual seat map showing available and booked seats, with temporary seat locking to prevent double booking.
+	\item Fare calculation with special rules such as peak-season fares, along with booking, cancellation, and booking history using a simulated payment step.
+	\item Reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+\end{enumerate}
+
+% ---- 1.5 ----
+\section{Limitations}
+
+The system has the following limitations:
+\begin{enumerate}
+	\item Payment is simulated. No real money is processed, and integration with a payment gateway such as eSewa or Khalti is left for future work.
+	\item The system is a prototype that runs on sample data. It is not connected to real bus operators, and the routes and fares are for demonstration only.
+	\item It does not provide live bus tracking or GPS location.
+	\item It is a web application only. A native mobile app is not developed.
+	\item It is not tested for large-scale traffic and is designed for a limited number of users.
+	\item Notifications such as SMS or email are not included in the current version.
 \end{enumerate}

@@ -75,15 +75,16 @@
 
 % ---------- Fill-in fields (edit these once; used on the cover and certificate pages) ----------
 \newcommand{\ProjectTitle}{Nepal Bus Ticket Booking System}
-\newcommand{\StudentName}{[Student Name]}
-\newcommand{\RollNo}{[TU Roll No.]}
+\newcommand{\StudentName}{Nischal Shrestha}
+\newcommand{\RegNo}{6-2-244-15-2023}
+\newcommand{\RollNo}{24402165}
 \newcommand{\CollegeName}{Kabhre Multiple Campus}
 \newcommand{\CollegeAddress}{Banepa-Budol, Nepal}
 \newcommand{\DepartmentName}{Information Technology}
 \newcommand{\SupervisorName}{[Supervisor Name]}
 \newcommand{\SupervisorDesignation}{[Academic Designation]}
 \newcommand{\HODName}{[HOD Name]}
-\newcommand{\SubmissionDate}{[Month, Year]}
+\newcommand{\SubmissionDate}{October, 2026}
 
 % ---------- Logos ----------
 % Put the "Logos" folder (with TU.jpg and college.png) in the same folder as this .tex file.
@@ -104,6 +105,7 @@
 
 % ---------- Front-matter page title (16 pt bold, centred) ----------
 \newcommand{\frontmattertitle}[1]{%
+  \addcontentsline{toc}{chapter}{\MakeUppercase{#1}}%
   \begin{center}{\fontsize{16}{20}\selectfont\bfseries #1}\end{center}\vspace{6pt}}
 
 \begin{document}
@@ -114,9 +116,11 @@
 \input{frontmatter/abstract}
 \input{frontmatter/acknowledgement}
 
-% Table of Contents and lists (to be added):
-% \clearpage
-% \begingroup\singlespacing\tableofcontents\endgroup
+% ---------- 5. Table of Contents ----------
+\clearpage
+\begingroup\singlespacing\tableofcontents\endgroup
+
+% ---------- 6. Lists (turn on once you have figures/tables/abbreviations) ----------
 % \clearpage \listoffigures
 % \clearpage \listoftables
 
