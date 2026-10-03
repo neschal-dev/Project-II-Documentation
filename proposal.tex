@@ -1,0 +1,204 @@
+% Project II (CAPJ356) - Project Proposal
+% Format: A4, Times 12 pt, 1.5 line spacing, justified,
+% margins: top 1in, bottom 1in, right 1in, left 1.25in,
+% page number bottom-centre (roman for preliminary pages, arabic from Chapter 1).
+%
+% Compile with pdfLaTeX (works on Overleaf). Run it twice so the
+% Table of Contents fills in. For the real Times New Roman, use XeLaTeX
+% and the fontspec lines shown below.
+
+\documentclass[12pt,a4paper,openany,oneside]{report}
+
+% ---------- Page layout ----------
+\usepackage[a4paper,top=1in,bottom=1in,right=1in,left=1.25in]{geometry}
+
+% ---------- Font: Times-like ----------
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+% XeLaTeX alternative (comment out the two lines above first):
+% \usepackage{fontspec}
+% \setmainfont{Times New Roman}
+
+% ---------- Spacing and alignment ----------
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=0pt, topsep=4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ---------- Headings: section 14 pt bold, subsection 12 pt bold ----------
+\usepackage{titlesec}
+\titleformat{\section}
+{\fontsize{14}{17}\selectfont\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}
+{\fontsize{12}{15}\selectfont\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% ---------- Chapter heading: "CHAPTER 1: INTRODUCTION" on one line, 16 pt bold ----------
+% Also writes one line into the Table of Contents.
+\newcommand{\proposalchapter}[1]{%
+	\clearpage
+	\refstepcounter{chapter}%
+	\addcontentsline{toc}{chapter}{CHAPTER \thechapter: \MakeUppercase{#1}}%
+	\begin{center}\fontsize{16}{20}\selectfont\bfseries
+		CHAPTER \thechapter: \MakeUppercase{#1}
+	\end{center}\vspace{6pt}}
+
+% ---------- Table of Contents style ----------
+\usepackage{tocloft}
+\renewcommand{\contentsname}{\hfill Table of Contents\hfill\mbox{}}
+% The title of the Table of Contents (and lists) is a starred \chapter, so format it here:
+\titleformat{name=\chapter,numberless}[block]
+{\centering\fontsize{16}{20}\selectfont\bfseries}{}{0pt}{}
+\titlespacing*{\chapter}{0pt}{0pt}{14pt}
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{4pt}
+\setlength{\cftbeforesecskip}{2pt}
+\setlength{\cftsecindent}{1.5em}
+\setlength{\cftsecnumwidth}{2.5em}
+\setlength{\cftsubsecindent}{3.5em}
+\setlength{\cftsubsecnumwidth}{3em}
+
+% ---------- Captions: table caption above, figure caption below ----------
+\usepackage{caption}
+\captionsetup{font={bf,normalsize}, labelsep=colon}
+% Put \caption BEFORE the tabular for tables and AFTER the graphic for figures.
+
+% ---------- Page numbers: bottom-centre ----------
+\pagestyle{plain}
+
+\begin{document}
+	
+	% ================= Title page (no page number) =================
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\centering
+		\singlespacing
+		
+		{\fontsize{16}{20}\selectfont\bfseries Tribhuvan University}\\[4pt]
+		{\fontsize{14}{17}\selectfont\bfseries Faculty of Humanities and Social Sciences}\\[28pt]
+		
+		{\fontsize{14}{17}\selectfont\bfseries A Project Proposal}\\[6pt]
+		{\fontsize{12}{15}\selectfont on}\\[18pt]
+		
+		{\fontsize{16}{20}\selectfont\bfseries Nepal Bus Ticket Booking System}\\[28pt]
+		
+		{\fontsize{12}{15}\selectfont
+			Submitted in partial fulfilment of the requirements for\\
+			Project II (CAPJ356), Bachelor of Computer Applications (BCA), Sixth Semester}\\[40pt]
+		
+		{\fontsize{12}{15}\selectfont\bfseries Submitted by}\\[6pt]
+		{\fontsize{12}{15}\selectfont
+			[Your Full Name]\\
+			TU Roll No.: [Roll No.]\\
+			{[College Name]}}\\[28pt]
+		
+		{\fontsize{12}{15}\selectfont\bfseries Supervisor}\\[6pt]
+		{\fontsize{12}{15}\selectfont [Supervisor Name]}\\[28pt]
+		
+		{\fontsize{12}{15}\selectfont [Month Day, Year]}
+	\end{titlepage}
+	
+	% ================= Table of Contents (roman page numbers) =================
+	\pagenumbering{roman}
+	\begingroup
+	\singlespacing
+	\tableofcontents
+	\endgroup
+	
+	% Optional lists, uncomment once you have figures/tables:
+	% \clearpage \listoffigures
+	% \clearpage \listoftables
+	
+	% ================= CHAPTER 1: INTRODUCTION =================
+	\clearpage
+	\pagenumbering{arabic}
+	\proposalchapter{Introduction}
+	
+	\section{Introduction}
+	
+	Road transport is the main means of long-distance travel in Nepal, and buses connect cities such as Kathmandu, Pokhara, Chitwan, and Birgunj to the rest of the country. Despite this, ticket booking for many bus services still depends on physical counters, phone calls, or local agents. Passengers often have to visit the counter in person to check seat availability, compare prices, or confirm a booking, and operators must manage seat records manually.
+	
+	The Nepal Bus Ticket Booking System is a web-based application that allows passengers to search for buses, view available seats, and reserve tickets online. Passengers can search by origin, destination, and travel date, select seats from a visual seat map, and receive a booking confirmation. Bus operators can manage their routes, buses, schedules, and fares, while administrators oversee users, bookings, and reports.
+	
+	The system focuses on solving the problem of double booking through a seat-locking mechanism, which holds a seat temporarily while a passenger completes the booking. It uses sorting and searching algorithms to present results by price or departure time, and a fare calculation module for pricing rules. The system will be developed as a responsive, mobile-friendly web application using Next.js, NestJS, PostgreSQL, and Tailwind CSS. Payment will be demonstrated through a simulated payment workflow, designed so a real payment gateway can be added later.
+	
+	\section{Problem Statement}
+	
+	Many long-distance bus services in Nepal still rely on manual ticketing. Passengers must visit counters or contact agents to find out which buses are running, whether seats are available, and what the fare is. Comparing the options of different operators on a route takes time, and a passenger often cannot be sure a seat is confirmed until they reach the counter.
+	
+	Manual booking also creates problems for operators. Seat records are kept on paper or in separate registers, which makes errors likely. When two agents or counters sell the same seat, double booking occurs and leads to disputes at boarding time. Cancellations, fare changes during festival seasons, and sales reports are hard to track without a central system.
+	
+	Because of these issues, there is a need for a system that shows live seat availability, prevents the same seat from being booked twice, and gives operators one place to manage routes, schedules, fares, and bookings. This project addresses that need by developing a web-based bus ticket booking system tailored to the Nepali context.
+	
+	\section{Objectives}
+	
+	The main objective of this project is to develop a web-based bus ticket booking system that makes seat reservation easier and more reliable for passengers and operators in Nepal.
+	
+	The specific objectives are:
+	\begin{enumerate}
+		\item To develop a search module that lets passengers find buses by origin, destination, and travel date, and sort the results by price or departure time.
+		\item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
+		\item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
+		\item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
+		\item To implement a booking and cancellation workflow with a simulated payment step, designed so a real payment gateway can be integrated later.
+		\item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+	\end{enumerate}
+	
+	\section{Scope}
+	
+	The scope of this project covers the design and development of a web-based bus ticket booking system for long-distance routes in Nepal. The system is a responsive web application for desktop and mobile browsers and includes the following:
+	\begin{enumerate}
+		\item Three user roles (passengers, bus operators, and administrators) with registration, login, secure password storage, and role-based access.
+		\item Management of routes, buses, schedules, and fares by operators and administrators.
+		\item Searching for buses by origin, destination, and travel date, with results sorted by price or departure time.
+		\item A visual seat map showing available and booked seats, with temporary seat locking to prevent double booking.
+		\item Fare calculation with special rules such as peak-season fares, along with booking, cancellation, and booking history using a simulated payment step.
+		\item Reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+	\end{enumerate}
+	
+	\section{Limitations}
+	
+	The system has the following limitations:
+	\begin{enumerate}
+		\item Payment is simulated. No real money is processed, and integration with a payment gateway such as eSewa or Khalti is left for future work.
+		\item The system is a prototype that runs on sample data. It is not connected to real bus operators, and the routes and fares are for demonstration only.
+		\item It does not provide live bus tracking or GPS location.
+		\item It is a web application only. A native mobile app is not developed.
+		\item It is not tested for large-scale traffic and is designed for a limited number of users.
+		\item Notifications such as SMS or email are not included in the current version.
+	\end{enumerate}
+	
+	% \section{Report Organization}   % optional, as in the sample TOC
+	
+	% ================= CHAPTER 2: METHODOLOGY (to be written) =================
+	% \proposalchapter{Methodology}
+	% \section{Requirement Identification}
+	% \subsection{Study of Existing System}
+	% \subsection{Literature Review}
+	% \subsection{Requirement Analysis}
+	% \section{Feasibility Study}
+	% \subsection{Technical Feasibility}
+	% \subsection{Operational Feasibility}
+	% \subsection{Economic Feasibility}
+	% \section{High Level Design of System}
+	
+	% ================= CHAPTER 3: GANTT CHART (to be written) =================
+	% \proposalchapter{Gantt Chart}
+	
+	% ================= CHAPTER 4: EXPECTED OUTCOME (to be written) =================
+	% \proposalchapter{Expected Outcome}
+	
+	% ================= REFERENCES (to be written, IEEE style) =================
+	% \clearpage
+	% \addcontentsline{toc}{chapter}{REFERENCES}
+	% \begin{center}\fontsize{16}{20}\selectfont\bfseries REFERENCES\end{center}
+	% \begin{thebibliography}{99}
+		%   \bibitem{ref1} A. Author, ``Title,'' \textit{Journal}, vol. X, no. Y, pp. 1--10, 2024.
+		% \end{thebibliography}
+	
+\end{document}
