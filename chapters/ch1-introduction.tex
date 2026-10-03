@@ -1,0 +1,34 @@
+% ================= CHAPTER 1: INTRODUCTION =================
+\proposalchapter{Introduction}
+
+\section{Introduction}
+
+Road transport is the main means of long-distance travel in Nepal, and buses connect cities such as Kathmandu, Pokhara, Chitwan, and Birgunj to the rest of the country. Despite this, ticket booking for many bus services still depends on physical counters, phone calls, or local agents. Passengers often have to visit the counter in person to check seat availability, compare prices, or confirm a booking, and operators must manage seat records manually.
+
+The Nepal Bus Ticket Booking System is a web-based application that allows passengers to search for buses, view available seats, and reserve tickets online. Passengers can search by origin, destination, and travel date, select seats from a visual seat map, and receive a booking confirmation. Bus operators can manage their routes, buses, schedules, and fares, while administrators oversee users, bookings, and reports.
+
+The system focuses on solving the problem of double booking through a seat-locking mechanism, which holds a seat temporarily while a passenger completes the booking. It uses sorting and searching algorithms to present results by price or departure time, and a fare calculation module for pricing rules. The system will be developed as a responsive, mobile-friendly web application using Next.js, NestJS, PostgreSQL, and Tailwind CSS. Payment will be demonstrated through a simulated payment workflow, designed so a real payment gateway can be added later.
+
+% ---- 1.2 ----
+\section{Problem Statement}
+
+Many long-distance bus services in Nepal still rely on manual ticketing. Passengers must visit counters or contact agents to find out which buses are running, whether seats are available, and what the fare is. Comparing the options of different operators on a route takes time, and a passenger often cannot be sure a seat is confirmed until they reach the counter.
+
+Manual booking also creates problems for operators. Seat records are kept on paper or in separate registers, which makes errors likely. When two agents or counters sell the same seat, double booking occurs and leads to disputes at boarding time. Cancellations, fare changes during festival seasons, and sales reports are hard to track without a central system.
+
+Because of these issues, there is a need for a system that shows live seat availability, prevents the same seat from being booked twice, and gives operators one place to manage routes, schedules, fares, and bookings. This project addresses that need by developing a web-based bus ticket booking system tailored to the Nepali context.
+
+% ---- 1.3 ----
+\section{Objectives}
+
+The main objective of this project is to develop a web-based bus ticket booking system that makes seat reservation easier and more reliable for passengers and operators in Nepal.
+
+The specific objectives are:
+\begin{enumerate}
+  \item To develop a search module that lets passengers find buses by origin, destination, and travel date, and sort the results by price or departure time.
+  \item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
+  \item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
+  \item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
+  \item To implement a booking and cancellation workflow with a simulated payment step, designed so a real payment gateway can be integrated later.
+  \item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+\end{enumerate}
