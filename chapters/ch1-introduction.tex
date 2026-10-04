@@ -7,7 +7,7 @@ Road transport is the main means of long-distance travel in Nepal, and buses con
 
 The Nepal Bus Ticket Booking System is a web-based application that allows passengers to search for buses, view available seats, and reserve tickets online. Passengers can search by origin, destination, and travel date, select seats from a visual seat map, and receive a booking confirmation. Bus operators can manage their routes, buses, schedules, and fares, while administrators oversee users, bookings, and reports.
 
-The system focuses on solving the problem of double booking through a seat-locking mechanism, which holds a seat temporarily while a passenger completes the booking. It uses sorting and searching algorithms to present results by price or departure time, and a fare calculation module for pricing rules. The system will be developed as a responsive, mobile-friendly web application using Next.js, NestJS, PostgreSQL, and Tailwind CSS. Payment will be demonstrated through a simulated payment workflow, designed so a real payment gateway can be added later.
+The system focuses on solving the problem of double booking through a seat-locking mechanism, which holds a seat temporarily while a passenger completes the booking. It uses sorting and searching algorithms to present results by price or departure time, and a fare calculation module for pricing rules. The system will be developed as a responsive, mobile-friendly web application using Next.js, NestJS, PostgreSQL, and Tailwind CSS. Online payment will be integrated through eSewa.
 
 % ---- 1.2 ----
 \section{Problem Statement}
@@ -29,7 +29,7 @@ The specific objectives are:
 	\item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
 	\item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
 	\item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
-	\item To implement a booking and cancellation workflow with a simulated payment step, designed so a real payment gateway can be integrated later.
+	\item To implement a booking and cancellation workflow with online payment through eSewa, confirming a booking only after the payment is verified.
 	\item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
 \end{enumerate}
 
@@ -42,7 +42,7 @@ The scope of this project covers the design and development of a web-based bus t
 	\item Management of routes, buses, schedules, and fares by operators and administrators.
 	\item Searching for buses by origin, destination, and travel date, with results sorted by price or departure time.
 	\item A visual seat map showing available and booked seats, with temporary seat locking to prevent double booking.
-	\item Fare calculation with special rules such as peak-season fares, along with booking, cancellation, and booking history using a simulated payment step.
+	\item Fare calculation with special rules such as peak-season fares, along with booking, cancellation, and booking history with online payment through eSewa.
 	\item Reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
 \end{enumerate}
 
@@ -51,8 +51,8 @@ The scope of this project covers the design and development of a web-based bus t
 
 The system has the following limitations:
 \begin{enumerate}
-	\item Payment is simulated. No real money is processed, and integration with a payment gateway such as eSewa or Khalti is left for future work.
-	\item The system is a prototype that runs on sample data. It is not connected to real bus operators, and the routes and fares are for demonstration only.
+	\item Payment works only in the eSewa test (sandbox) environment with test accounts, so no real money is processed. Moving to live payments needs a registered merchant account and is left for future work.
+	\item The system runs on sample data. It is not connected to real bus operators, and the routes and fares are for demonstration only.
 	\item It does not provide live bus tracking or GPS location.
 	\item It is a web application only. A native mobile app is not developed.
 	\item It is not tested for large-scale traffic and is designed for a limited number of users.

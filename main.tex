@@ -30,11 +30,11 @@
 % ---------- Headings: main 14 pt bold, sub-headings 12 pt bold ----------
 \usepackage{titlesec}
 \titleformat{\section}
-{\fontsize{14}{17}\selectfont\bfseries}{\thesection}{0.6em}{}
+  {\fontsize{14}{17}\selectfont\bfseries}{\thesection}{0.6em}{}
 \titleformat{\subsection}
-{\fontsize{12}{15}\selectfont\bfseries}{\thesubsection}{0.6em}{}
+  {\fontsize{12}{15}\selectfont\bfseries}{\thesubsection}{0.6em}{}
 \titleformat{\subsubsection}
-{\fontsize{12}{15}\selectfont\bfseries}{\thesubsubsection}{0.6em}{}
+  {\fontsize{12}{15}\selectfont\bfseries}{\thesubsubsection}{0.6em}{}
 \titlespacing*{\section}{0pt}{12pt}{6pt}
 \titlespacing*{\subsection}{0pt}{10pt}{4pt}
 \titlespacing*{\subsubsection}{0pt}{8pt}{4pt}
@@ -42,18 +42,18 @@
 % ---------- Chapter heading: "CHAPTER 1: INTRODUCTION" on one line, 16 pt bold ----------
 % Also writes one line into the Table of Contents.
 \newcommand{\proposalchapter}[1]{%
-	\clearpage
-	\refstepcounter{chapter}%
-	\addcontentsline{toc}{chapter}{CHAPTER \thechapter: \MakeUppercase{#1}}%
-	\begin{center}\fontsize{16}{20}\selectfont\bfseries
-		CHAPTER \thechapter: \MakeUppercase{#1}
-	\end{center}\vspace{6pt}}
+  \clearpage
+  \refstepcounter{chapter}%
+  \addcontentsline{toc}{chapter}{CHAPTER \thechapter: \MakeUppercase{#1}}%
+  \begin{center}\fontsize{16}{20}\selectfont\bfseries
+    CHAPTER \thechapter: \MakeUppercase{#1}
+  \end{center}\vspace{6pt}}
 
 % ---------- Table of Contents style ----------
 \usepackage{tocloft}
 \renewcommand{\contentsname}{\hfill Table of Contents\hfill\mbox{}}
 \titleformat{name=\chapter,numberless}[block]
-{\centering\fontsize{16}{20}\selectfont\bfseries}{}{0pt}{}
+  {\centering\fontsize{16}{20}\selectfont\bfseries}{}{0pt}{}
 \titlespacing*{\chapter}{0pt}{0pt}{14pt}
 \renewcommand{\cftchapfont}{\normalfont}
 \renewcommand{\cftchappagefont}{\normalfont}
@@ -66,6 +66,8 @@
 \setlength{\cftsubsecnumwidth}{3em}
 
 % ---------- Captions: table caption above, figure caption below ----------
+\usepackage{array}
+\usepackage{url}
 \usepackage{caption}
 \captionsetup{font={bf,normalsize}, labelsep=colon}
 % Put \caption BEFORE the tabular for tables and AFTER the graphic for figures.
@@ -90,52 +92,50 @@
 % Put the "Logos" folder (with TU.jpg and college.png) in the same folder as this .tex file.
 % If a file is missing, a labelled box is shown instead so the document still compiles.
 \usepackage{graphicx}
-\usepackage{array}   % needed for \newcolumntype in ch2
-\usepackage{url}     % needed for \url and \urlstyle in references
 % Cover order: TU logo on top, college logo second.
 % Each file is looked for in a "Logos" folder next to this .tex file first,
 % then in the D: drive folder. Each name is defined only ONCE (defining it twice is an error).
 \IfFileExists{Logos/TU.jpg}%
-{\newcommand{\TULogoFile}{Logos/TU.jpg}}%
-{\newcommand{\TULogoFile}{D:/College Project/Documentation/Logos/TU.jpg}}
+  {\newcommand{\TULogoFile}{Logos/TU.jpg}}%
+  {\newcommand{\TULogoFile}{D:/College Project/Documentation/Logos/TU.jpg}}
 \IfFileExists{Logos/college.png}%
-{\newcommand{\CollegeLogoFile}{Logos/college.png}}%
-{\newcommand{\CollegeLogoFile}{D:/College Project/Documentation/Logos/college.png}}
+  {\newcommand{\CollegeLogoFile}{Logos/college.png}}%
+  {\newcommand{\CollegeLogoFile}{D:/College Project/Documentation/Logos/college.png}}
 \newcommand{\LogoImage}[2]{%
-	\IfFileExists{#1}{\includegraphics[height=2.6cm]{#1}}%
-	{\fbox{\parbox[c][2.6cm][c]{2.6cm}{\centering\small [#2]}}}}
+  \IfFileExists{#1}{\includegraphics[height=2.6cm]{#1}}%
+  {\fbox{\parbox[c][2.6cm][c]{2.6cm}{\centering\small [#2]}}}}
 
 % ---------- Front-matter page title (16 pt bold, centred) ----------
 \newcommand{\frontmattertitle}[1]{%
-	\addcontentsline{toc}{chapter}{\MakeUppercase{#1}}%
-	\begin{center}{\fontsize{16}{20}\selectfont\bfseries #1}\end{center}\vspace{6pt}}
+  \addcontentsline{toc}{chapter}{\MakeUppercase{#1}}%
+  \begin{center}{\fontsize{16}{20}\selectfont\bfseries #1}\end{center}\vspace{6pt}}
 
 \begin{document}
-	
-	% ---------- Front matter (roman page numbers start inside certificate.tex) ----------
-	\input{frontmatter/cover}
-	\input{frontmatter/certificate}
-	\input{frontmatter/abstract}
-	\input{frontmatter/acknowledgement}
-	
-	% ---------- 5. Table of Contents ----------
-	\clearpage
-	\begingroup\singlespacing\tableofcontents\endgroup
-	
-	% ---------- 6. Lists (turn on once you have figures/tables/abbreviations) ----------
-	% \clearpage \listoffigures
-	% \clearpage \listoftables
-	
-	% ---------- Main report: arabic page numbers from 1 ----------
-	\clearpage
-	\pagenumbering{arabic}
-	
-	\input{chapters/ch1-introduction}
-	
-	% Uncomment each line when that chapter is ready:
-	\input{chapters/ch2-methodology}
-	% \input{chapters/ch3-gantt-chart}
-	% \input{chapters/ch4-expected-outcome}
-	\input{chapters/references}
-	
+
+% ---------- Front matter (roman page numbers start inside certificate.tex) ----------
+\input{frontmatter/cover}
+\input{frontmatter/certificate}
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgement}
+
+% ---------- 5. Table of Contents ----------
+\clearpage
+\begingroup\singlespacing\tableofcontents\endgroup
+
+% ---------- 6. Lists (turn on once you have figures/tables/abbreviations) ----------
+% \clearpage \listoffigures
+% \clearpage \listoftables
+
+% ---------- Main report: arabic page numbers from 1 ----------
+\clearpage
+\pagenumbering{arabic}
+
+\input{chapters/ch1-introduction}
+
+% Uncomment each line when that chapter is ready:
+\input{chapters/ch2-methodology}
+\input{chapters/ch3-gantt-chart}
+\input{chapters/ch4-expected-outcome}
+\input{chapters/references}
+
 \end{document}
