@@ -99,8 +99,37 @@ The system is designed with the object-oriented approach. Figure~\ref{fig:classd
 \end{figure}
 
 \subsection{Dynamic Modelling}
-% State diagram (booking and seat) and sequence diagram (booking and eSewa payment)
-[To be written]
+
+Dynamic modelling shows how the objects of the system change over time and how they work together. State diagrams show the states that one object passes through, and a sequence diagram shows the messages that are exchanged between the parts of the system during a scenario. This section gives a state diagram for a booking, a state diagram for a seat, and a sequence diagram for booking and paying for seats.
+
+\textbf{State diagram of a booking.} Figure~\ref{fig:bookingstate} shows the states of a \textit{Booking}. When a passenger selects seats, \texttt{holdSeats()} creates the booking in the \textit{Held} state, and the seats stay held until \texttt{holdExpiresAt}. A failed payment leaves the booking in the \textit{Held} state, so the passenger can try again. When the server verifies the payment, \texttt{confirm()} moves the booking to \textit{Confirmed}. If the hold time ends before the payment is completed, \texttt{releaseHold()} moves the booking to \textit{Expired} and releases the seats. A passenger can cancel a held booking, and can cancel a confirmed booking only if the cancellation rule allows it. In both cases \texttt{cancel()} moves the booking to \textit{Cancelled} and releases the seats. \textit{Expired} and \textit{Cancelled} are end states.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{figures/booking-state-diagram.pdf}
+	\caption{State diagram of a booking}
+	\label{fig:bookingstate}
+\end{figure}
+
+\textbf{State diagram of a seat.} Figure~\ref{fig:seatstate} shows the state of one seat on one trip. A seat is \textit{Available} when the trip is scheduled. It becomes \textit{Held} when a passenger holds it with \texttt{holdSeats()}, and \textit{Booked} when the booking is confirmed. A held seat goes back to \textit{Available} when the hold ends with \texttt{releaseHold()} or when the booking is cancelled before payment, and a booked seat goes back to \textit{Available} when the booking is cancelled. The database allows only one passenger to hold a seat at a time, so a seat that is \textit{Held} or \textit{Booked} cannot be held by another passenger.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{figures/seat-state-diagram.pdf}
+	\caption{State diagram of a seat}
+	\label{fig:seatstate}
+\end{figure}
+
+\textbf{Sequence diagram of booking and payment.} Figure~\ref{fig:bookingsequence} shows the messages exchanged between the passenger, the web application (Next.js), the server (NestJS), the database (PostgreSQL), and eSewa. After the passenger selects a trip and seats, the server calls \texttt{holdSeats()}. In one database transaction it locks the seat rows and checks that the seats are free. If they are free, the server saves the booking with the status held and the hold expiry time, and the passenger is shown the payment page. If the seats have already been taken, the passenger is asked to choose other seats.
+
+When the passenger confirms, the server saves a payment with the status pending and returns a signed payment request. The web application redirects the passenger to eSewa, where the passenger approves the payment, and eSewa redirects the passenger back with the payment result. The web application sends this result to the server, and the server does not trust it directly. It asks eSewa for the payment status. Only if the status is complete does the server update the payment, confirm the booking, and mark the seats as booked. Otherwise the payment is marked as failed and the booking stays held, so the passenger can retry until the hold ends. If the hold time ends without payment, the server calls \texttt{releaseHold()} and the seats become available again.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{figures/booking-sequence-diagram.pdf}
+	\caption{Sequence diagram of booking and payment}
+	\label{fig:bookingsequence}
+\end{figure}
 
 \subsection{Process Modelling}
 % Activity diagram of the booking process
