@@ -1,0 +1,42 @@
+% CHAPTER 4: IMPLEMENTATION AND TESTING
+\proposalchapter{Implementation and Testing}
+
+\section{Implementation}
+
+\subsection{Tools Used}
+
+The following tools are used to develop and manage the project.
+
+\textbf{CASE and development tools.} Visual Studio Code is the code editor. Claude is used as an AI assistant for design discussion, drafting, and review. Notion is used for project tracking and management. Git is used for version control, and the source code is hosted on GitHub.
+
+\textbf{Programming languages and frameworks.} The system is written in TypeScript on Node.js. Next.js and Tailwind CSS are used for the front end, and NestJS is used for the back end.
+
+\textbf{Database.} PostgreSQL is used as the database.
+
+\subsection{Implementation Details of Modules}
+
+The system is divided into the following modules, which follow the increments described in Section~\ref{sec:devmethod}.
+\begin{enumerate}
+  \item \textit{Authentication and role management:} registration, login, and role-based access for passengers, operators, and administrators.
+  \item \textit{Bus, route, and trip management:} buses with seat layouts, routes, schedules, and fares.
+  \item \textit{Search and seat map:} searching buses by origin, destination, and date, with results sorted by price or departure time, and a seat map for each trip.
+  \item \textit{Booking and seat locking:} temporary seat holds, booking, and cancellation.
+  \item \textit{Payment:} online payment through eSewa, with verification before a booking is confirmed.
+  \item \textit{Fare rules and reports:} special fare rules and reports on bookings, revenue, and seat occupancy.
+\end{enumerate}
+
+\section{Testing}
+
+The system will be tested as each increment is completed. The detailed test cases will be prepared during development and reported in the final report.
+
+\subsection{Test Cases for Unit Testing}
+
+Unit tests will cover the functions of each module, such as fare calculation, seat holding and release, sorting of search results, and password hashing.
+
+\subsection{Test Cases for System Testing}
+
+System tests will follow the complete booking flow, from search to confirmed booking, including payment verification and cancellation. They will include a test with simultaneous requests for the same seat, to confirm that double booking does not occur.
+
+\section{Project Schedule}
+% Gantt chart showing the project timeline
+[To be written]

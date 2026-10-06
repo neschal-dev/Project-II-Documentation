@@ -25,36 +25,60 @@ The main objective of this project is to develop a web-based bus ticket booking 
 
 The specific objectives are:
 \begin{enumerate}
-	\item To develop a search module that lets passengers find buses by origin, destination, and travel date, and sort the results by price or departure time.
-	\item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
-	\item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
-	\item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
-	\item To implement a booking and cancellation workflow with online payment through eSewa, confirming a booking only after the payment is verified.
-	\item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+  \item To develop a search module that lets passengers find buses by origin, destination, and travel date, and sort the results by price or departure time.
+  \item To implement a seat selection and booking module that shows live seat availability and prevents double booking through a temporary seat-locking mechanism.
+  \item To provide role-based access for passengers, bus operators, and administrators, with secure authentication.
+  \item To develop a fare calculation module that supports route-based pricing and special pricing rules, such as peak-season fares.
+  \item To implement a booking and cancellation workflow with online payment through eSewa, confirming a booking only after the payment is verified.
+  \item To generate reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
 \end{enumerate}
 
 % ---- 1.4 ----
-\section{Scope}
+\section{Scope and Limitation}
+
+\subsection{Scope}
 
 The scope of this project covers the design and development of a web-based bus ticket booking system for long-distance routes in Nepal. The system is a responsive web application for desktop and mobile browsers and includes the following:
 \begin{enumerate}
-	\item Three user roles (passengers, bus operators, and administrators) with registration, login, secure password storage, and role-based access.
-	\item Management of routes, buses, schedules, and fares by operators and administrators.
-	\item Searching for buses by origin, destination, and travel date, with results sorted by price or departure time.
-	\item A visual seat map showing available and booked seats, with temporary seat locking to prevent double booking.
-	\item Fare calculation with special rules such as peak-season fares, along with booking, cancellation, and booking history with online payment through eSewa.
-	\item Reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
+  \item Three user roles (passengers, bus operators, and administrators) with registration, login, secure password storage, and role-based access.
+  \item Management of routes, buses, schedules, and fares by operators and administrators.
+  \item Searching for buses by origin, destination, and travel date, with results sorted by price or departure time.
+  \item A visual seat map showing available and booked seats, with temporary seat locking to prevent double booking.
+  \item Fare calculation with special rules such as peak-season fares, along with booking, cancellation, and booking history with online payment through eSewa.
+  \item Reports for operators and administrators, such as total bookings, revenue, and seat occupancy.
 \end{enumerate}
 
 % ---- 1.5 ----
-\section{Limitations}
+\subsection{Limitations}
 
 The system has the following limitations:
 \begin{enumerate}
-	\item Payment works only in the eSewa test (sandbox) environment with test accounts, so no real money is processed. Moving to live payments needs a registered merchant account and is left for future work.
-	\item The system runs on sample data. It is not connected to real bus operators, and the routes and fares are for demonstration only.
-	\item It does not provide live bus tracking or GPS location.
-	\item It is a web application only. A native mobile app is not developed.
-	\item It is not tested for large-scale traffic and is designed for a limited number of users.
-	\item Notifications such as SMS or email are not included in the current version.
+  \item Payment works only in the eSewa test (sandbox) environment with test accounts, so no real money is processed. Moving to live payments needs a registered merchant account and is left for future work.
+  \item The system runs on sample data. It is not connected to real bus operators, and the routes and fares are for demonstration only.
+  \item It does not provide live bus tracking or GPS location.
+  \item It is a web application only. A native mobile app is not developed.
+  \item It is not tested for large-scale traffic and is designed for a limited number of users.
+  \item Notifications such as SMS or email are not included in the current version.
 \end{enumerate}
+
+% ---- 1.5 ----
+\section{Development Methodology}\label{sec:devmethod}
+
+The system is developed using the iterative incremental model of the software development life cycle. Instead of building everything at once, the system is divided into increments. Each increment goes through requirements, design, implementation, and testing, and ends with a working part of the system that is reviewed with the supervisor before the next increment starts. This model suits a single developer with weekly supervisor meetings, because problems in the design are found early, while they are still cheap to fix.
+
+The planned increments are:
+\begin{enumerate}
+  \item Authentication and role-based access for passengers, operators, and administrators.
+  \item Management of buses, routes, schedules, and fares.
+  \item Bus search and the seat map, with sorting of results.
+  \item Seat locking and booking, including cancellation.
+  \item Online payment through eSewa, with payment verification.
+  \item Special fare rules and reports.
+\end{enumerate}
+
+Each increment is tested when it is finished, and a final round of system testing and documentation follows the last increment.
+
+% ---- 1.6 ----
+\section{Report Organization}
+
+This proposal is organized into five chapters. Chapter 1 introduces the project, the problem, the objectives, the scope and limitations, and the development methodology. Chapter 2 presents the background study, including a study of the existing system, and the literature review. Chapter 3 covers the system analysis and design: the requirements, the feasibility analysis, the object-oriented models, the system design, and the algorithms. Chapter 4 describes the planned implementation and testing, which covers the tools, the modules, the testing approach, and the project schedule. Chapter 5 gives the conclusion, the expected outcome, and the future recommendations. The references are listed at the end.

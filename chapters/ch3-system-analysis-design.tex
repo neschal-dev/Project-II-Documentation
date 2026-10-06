@@ -1,0 +1,122 @@
+% CHAPTER 3: SYSTEM ANALYSIS AND DESIGN (object-oriented approach)
+\proposalchapter{System Analysis and Design}
+
+\section{System Analysis}
+
+\subsection{Requirement Analysis}
+% A use-case diagram will be added here to illustrate the functional requirements.
+
+\textbf{i. Functional requirements}
+
+\textit{Passenger}
+\begin{enumerate}
+	\item Register, log in, and log out securely.
+	\item Search for buses by origin, destination, and travel date, and sort the results by price or departure time.
+	\item View the seat map of a bus and select one or more available seats.
+	\item Enter passenger details and pay online through eSewa.
+	\item View the booking confirmation and the booking history.
+	\item Cancel a booking according to the cancellation rule set in the system.
+\end{enumerate}
+
+\textit{Bus operator}
+\begin{enumerate}
+	\item Log in to a separate operator account.
+	\item Add and manage buses, including the bus type and seat layout.
+	\item Add and manage routes, schedules, and fares, including special pricing such as peak-season fares.
+	\item View the bookings made on their own buses.
+	\item Cancel a trip when needed.
+	\item View reports for their own buses, such as bookings, revenue, and seat occupancy.
+\end{enumerate}
+
+\textit{Administrator}
+\begin{enumerate}
+	\item Log in to an administrator account.
+	\item Approve and manage bus operators.
+	\item Manage user accounts, including blocking an account.
+	\item View all bookings across the system.
+	\item View overall reports for all operators.
+\end{enumerate}
+
+\textit{System}
+\begin{enumerate}
+	\item Prevent the same seat from being booked by two passengers, holding a selected seat temporarily while the booking is completed.
+	\item Calculate the fare from the route price and the pricing rules.
+	\item Confirm a booking only after the payment has been verified with eSewa.
+	\item Allow each role to access only its own features.
+\end{enumerate}
+
+\textbf{ii. Non-functional requirements}
+\begin{enumerate}
+	\item \textit{Security:} passwords are stored in hashed form, and only logged-in users can book or manage data.
+	\item \textit{Data integrity:} a booking, its seats, and its payment status are saved together or not at all.
+	\item \textit{Usability:} the interface is simple, responsive, and works on mobile and desktop browsers.
+	\item \textit{Performance:} search results and seat maps load in a reasonable time for the expected number of users.
+	\item \textit{Maintainability:} the code is organized in separate modules, so features can be changed or extended.
+	\item \textit{Compatibility:} the system works on current versions of common web browsers.
+\end{enumerate}
+
+\subsection{Feasibility Analysis}
+
+A feasibility study checks whether the proposed system can be built and used with the available skills, time, and resources. It is considered under three headings.
+
+\subsubsection{Technical Feasibility}
+
+The system uses open-source technologies that the developer already knows: Next.js and Tailwind CSS for the interface, NestJS for the server, both written in TypeScript, and PostgreSQL for the database. PostgreSQL's transactions and row-level locking support the seat-locking mechanism that prevents double booking. Online payment is integrated through the eSewa ePay sandbox, which provides test accounts and documented request and verification steps. Git and GitHub are used for version control. All of these are well documented and run on an ordinary computer. The main technical risk is getting the seat locking right when several users request the same seat at once, which will be reduced by using database transactions with row-level locks and by testing the booking flow with simultaneous requests. The project is therefore technically feasible.
+
+\subsubsection{Operational Feasibility}
+
+The system replaces counter visits and phone calls with web pages that follow a familiar flow: search for a bus, choose a seat, and book. Passengers only need a web browser and an internet connection, and the responsive design lets them use a phone or a computer. Operators and administrators get separate dashboards to manage buses, routes, fares, and bookings, which replaces paper registers. No special training is needed beyond a short introduction to the dashboards. The system runs on sample data, so its use by real operators is not part of this project. The system is operationally feasible.
+
+\subsubsection{Economic Feasibility}
+
+All the tools used are free, including Node.js, Next.js, NestJS, PostgreSQL, Tailwind CSS, Git, GitHub, and the code editor, so there are no licensing costs. Payment uses the free eSewa sandbox with test accounts, so no payment fees or merchant account are needed during development. The system can be developed and demonstrated on the developer's own computer. The main cost is the developer's time. The expected benefits are less manual work, shorter queues, and fewer record errors for operators, so the system is economically feasible.
+
+\subsection{Object Modelling}
+
+The system is designed with the object-oriented approach. Figure~\ref{fig:classdiagram} shows the class diagram, which describes the main classes of the system, their attributes and operations, and the relationships between them.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{figures/class-diagram.pdf}
+	\caption{Class diagram of the bus ticket booking system}
+	\label{fig:classdiagram}
+\end{figure}
+
+\textbf{Users.} \textit{User} is an abstract class that holds the common account data and the register, login, and logout operations. \textit{Passenger}, \textit{Operator}, and \textit{Administrator} inherit from it and add the operations of their own role. A passenger searches for buses and makes and cancels bookings. An operator manages buses, trips, and fare rules and views reports. An administrator approves operators, manages users, and views all bookings and system reports.
+
+\textbf{Buses and trips.} An \textit{Operator} owns many \textit{Bus} objects, and each bus is composed of its \textit{Seat} objects. A \textit{Route} and a \textit{Bus} together define a \textit{Trip}, which has a departure time and a base fare. \textit{FareRule} lets an operator set special pricing, such as peak-season fares, for a route.
+
+\textbf{Bookings and payments.} A \textit{Passenger} makes \textit{Booking} objects for a \textit{Trip}. A booking includes one or more \textit{BookingSeat} objects, each linking the booking to a seat and to the passenger's name. A booking can have \textit{Payment} objects, which store the eSewa transaction and its status. The \textit{Booking} class also carries the seat-locking operations: \texttt{holdSeats()} holds the selected seats for a limited time, and \texttt{releaseHold()} releases them when the time runs out without payment.
+
+% Object diagram: a sample booking shown with example objects
+\textbf{Object diagram.} Figure~\ref{fig:objectdiagram} shows an object diagram, which is a snapshot of the system with example objects. In it, the passenger Sita Sharma has made a confirmed booking for a Kathmandu to Pokhara trip operated by Sample Travels. The booking holds seat A1 of the bus. Its total of 1440 is the base fare of 1200 plus the 20 percent peak-season rule, and it is paid by one completed eSewa payment. The names and values are sample data.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{figures/object-diagram.pdf}
+	\caption{Object diagram of a confirmed booking}
+	\label{fig:objectdiagram}
+\end{figure}
+
+\subsection{Dynamic Modelling}
+% State diagram (booking and seat) and sequence diagram (booking and eSewa payment)
+[To be written]
+
+\subsection{Process Modelling}
+% Activity diagram of the booking process
+[To be written]
+
+\section{System Design}
+
+\subsection{Refinement of Classes and Objects}
+[To be written]
+
+\subsection{Component Diagram}
+[To be written]
+
+\subsection{Deployment Diagram}
+[To be written]
+
+\section{Algorithm Details}
+% Seat locking, merge sort, searching, fare calculation, password hashing
+[To be written]
