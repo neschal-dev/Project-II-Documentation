@@ -1,165 +1,126 @@
-% CHAPTER 3: SYSTEM ANALYSIS AND DESIGN (object-oriented approach)
+% CHAPTER 3: SYSTEM ANALYSIS AND DESIGN (Structured Approach)
 \proposalchapter{System Analysis and Design}
+
+The purpose of system analysis and design is to systematically create effective and efficient solutions to meet specific business or organizational needs[cite: 2]. System analysis is conducted to study a system and its components in order to identify core objectives, specify functional requirements, and define system boundaries[cite: 2].
 
 \section{System Analysis}
 
+The proposed Nepal Bus Ticket Booking System will be built following the structured approach to software development. The structured approach provides a step-by-step, process-driven methodology that focuses on data flow, system decomposition, and structured data modeling. System Analysis will evaluate the operational, functional, and technical requirements of the system using tools such as Data Flow Diagrams (DFDs), Entity-Relationship Diagrams (ERDs), and Data Dictionaries to ensure a clear separation of data and process logic before implementation.
+
 \subsection{Requirement Analysis}
 
-Figure~\ref{fig:usecasediagram} illustrates the use case diagram for the Nepal Bus Ticket Booking System. It defines the system boundary and models the functional requirements by showing how external actors interact with the primary features of the system.
+Requirement analysis defines the functional and non-functional requirements of the proposed system. Figure~\ref{fig:contextdiagram} shows the Context Diagram (Level 0 DFD) of the Nepal Bus Ticket Booking System, which establishes the system boundary and models high-level interactions between external entities and the system.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.75\textwidth,height=0.72\textheight,keepaspectratio]{figures/usecase-diagram.png}
-	\caption{Use case diagram of the Nepal bus ticket booking system}
-	\label{fig:usecasediagram}
+	\includegraphics[width=0.75\textwidth]{figures/context-diagram.png}
+	\caption{Context Diagram (Level 0 DFD) of Nepal Bus Ticket Booking System}
+	\label{fig:contextdiagram}
 \end{figure}
 
-The diagram identifies four primary actors and their interactions within the system:
+The system identifies four primary external entities:
 \begin{itemize}
-	\item \textbf{Passenger:} Interacts with the system to search for bus trips, select seats with temporary holds, initiate online payments, view booking confirmations, and request booking cancellations.
-	\item \textbf{Bus Operator:} Configures and manages fleet details, seat layouts, routes, travel schedules, dynamic peak fare rules, and views booking reports for their specific fleet.
-	\item \textbf{Administrator:} Governs system-level operations, including reviewing and approving new bus operators, managing user accounts, and accessing system-wide revenue and occupancy analytics.
-	\item \textbf{eSewa Gateway:} Acts as an external payment service integrated into the \textit{Make Online Payment} use case via an \texttt{<<include>>} relationship to verify transactions securely.
+	\item \textbf{Passenger:} Searches for bus trips, selects seats with temporary holds, initiates online payments, receives booking confirmations, and requests cancellations.
+	\item \textbf{Bus Operator:} Configures fleet details, seat layouts, routes, schedules, dynamic fare rules, and views booking reports for their fleet.
+	\item \textbf{Administrator:} Approves new bus operators, manages user accounts, and monitors system-wide analytics.
+	\item \textbf{eSewa Gateway:} External payment gateway integrated to verify transactions securely.
 \end{itemize}
 
-\textbf{i. Functional requirements}
+\textbf{i. Functional Requirements}
 
 \textit{Passenger}
 \begin{enumerate}
 	\item Register, log in, and log out securely.
-	\item Search for buses by origin, destination, and travel date, and sort the results by price or departure time.
-	\item View the seat map of a bus and select one or more available seats.
+	\item Search for buses by origin, destination, and travel date, and sort results by price or departure time.
+	\item View the seat map of a bus and select available seats.
 	\item Enter passenger details and pay online through eSewa.
-	\item View the booking confirmation and the booking history.
-	\item Cancel a booking according to the cancellation rule set in the system.
+	\item View booking confirmations and booking history.
+	\item Cancel a booking according to system cancellation rules.
 \end{enumerate}
 
-\textit{Bus operator}
+\textit{Bus Operator}
 \begin{enumerate}
-	\item Log in to a separate operator account.
-	\item Add and manage buses, including the bus type and seat layout.
-	\item Add and manage routes, schedules, and fares, including special pricing such as peak-season fares.
-	\item View the bookings made on their own buses.
-	\item Cancel a trip when needed.
-	\item View reports for their own buses, such as bookings, revenue, and seat occupancy.
+	\item Log in to an operator account.
+	\item Add and manage buses, including bus types and seat layouts.
+	\item Add and manage routes, schedules, and fares (including peak-season pricing).
+	\item View bookings and reports for their own buses.
+	\item Cancel scheduled trips when necessary.
 \end{enumerate}
 
 \textit{Administrator}
 \begin{enumerate}
 	\item Log in to an administrator account.
 	\item Approve and manage bus operators.
-	\item Manage user accounts, including blocking an account.
-	\item View all bookings across the system.
-	\item View overall reports for all operators.
+	\item Manage user accounts, including account suspension.
+	\item View all system-wide bookings and reports.
 \end{enumerate}
 
 \textit{System}
 \begin{enumerate}
-	\item Prevent the same seat from being booked by two passengers, holding a selected seat temporarily while the booking is completed.
-	\item Calculate the fare from the route price and the pricing rules.
-	\item Confirm a booking only after the payment has been verified with eSewa.
-	\item Allow each role to access only its own features.
+	\item Prevent double booking by holding selected seats temporarily during checkout.
+	\item Calculate fares based on base route pricing and active fare rules.
+	\item Confirm bookings only after successful payment verification with eSewa.
+	\item Enforce role-based access control across all features.
 \end{enumerate}
 
-\textbf{ii. Non-functional requirements}
+\textbf{ii. Non-Functional Requirements}
 \begin{enumerate}
-	\item \textit{Security:} passwords are stored in hashed form, and only logged-in users can book or manage data.
-	\item \textit{Data integrity:} a booking, its seats, and its payment status are saved together or not at all.
-	\item \textit{Usability:} the interface is simple, responsive, and works on mobile and desktop browsers.
-	\item \textit{Performance:} search results and seat maps load in a reasonable time for the expected number of users.
-	\item \textit{Maintainability:} the code is organized in separate modules, so features can be changed or extended.
-	\item \textit{Compatibility:} the system works on current versions of common web browsers.
+	\item \textit{Security:} Store passwords in hashed form; restrict access using role-based permissions.
+	\item \textit{Data Integrity:} Ensure atomic transactions for bookings, seat locks, and payments.
+	\item \textit{Usability:} Responsive and simple interface accessible via mobile and desktop browsers.
+	\item \textit{Performance:} Rapid seat map rendering and search result response times.
+	\item \textit{Maintainability:} Modular codebase structured for future extensibility.
+	\item \textit{Compatibility:} Full support across modern web browsers.
 \end{enumerate}
 
 \subsection{Feasibility Analysis}
 
-A feasibility study checks whether the proposed system can be built and used with the available skills, time, and resources. It is considered under three headings.
+A feasibility study determines whether the proposed system can be successfully developed and deployed using available technical skills, time, and resources.
 
 \subsubsection{Technical Feasibility}
-
-The system uses open-source technologies that the developer already knows: Next.js and Tailwind CSS for the interface, NestJS for the server, both written in TypeScript, and PostgreSQL for the database. PostgreSQL's transactions and row-level locking support the seat-locking mechanism that prevents double booking. Online payment is integrated through the eSewa ePay sandbox, which provides test accounts and documented request and verification steps. Git and GitHub are used for version control. All of these are well documented and run on an ordinary computer. The main technical risk is getting the seat locking right when several users request the same seat at once, which will be reduced by using database transactions with row-level locks and by testing the booking flow with simultaneous requests. The project is therefore technically feasible.
+The system will be built using open-source technologies: Next.js and Tailwind CSS for the user interface, NestJS for the server (written in TypeScript), and PostgreSQL for relational data storage. PostgreSQL's support for ACID transactions and row-level locking directly enables the seat-locking mechanism required to prevent concurrent double bookings. Payment integration will utilize the eSewa ePay sandbox environment for secure transaction processing. Git and GitHub will handle version control. The technical risk involved in seat concurrency will be mitigated using database row-level locking during simultaneous booking requests. Therefore, the project is technically feasible.
 
 \subsubsection{Operational Feasibility}
-
-The system replaces counter visits and phone calls with web pages that follow a familiar flow: search for a bus, choose a seat, and book. Passengers only need a web browser and an internet connection, and the responsive design lets them use a phone or a computer. Operators and administrators get separate dashboards to manage buses, routes, fares, and bookings, which replaces paper registers. No special training is needed beyond a short introduction to the dashboards. The system runs on sample data, so its use by real operators is not part of this project. The system is operationally feasible.
+The proposed system replaces physical ticket counters and phone calls with a streamlined online workflow: search, select seat, and pay. Passengers require only a modern web browser and internet connection. Operators and administrators receive dedicated web-based dashboards to manage fleets, routes, schedules, and analytics, reducing paper-based record-keeping. The system is operationally feasible.
 
 \subsubsection{Economic Feasibility}
+All core frameworks and development tools (Next.js, NestJS, PostgreSQL, Tailwind CSS, Git) are free and open-source, eliminating software licensing costs. Payment processing during development utilizes the free eSewa sandbox testing suite. The primary resource investment is development time, while operational benefits include reduced labor overhead, automated seat management, and improved record accuracy. Thus, the system is economically feasible.
 
-All the tools used are free, including Node.js, Next.js, NestJS, PostgreSQL, Tailwind CSS, Git, GitHub, and the code editor, so there are no licensing costs. Payment uses the free eSewa sandbox with test accounts, so no payment fees or merchant account are needed during development. The system can be developed and demonstrated on the developer's own computer. The main cost is the developer's time. The expected benefits are less manual work, shorter queues, and fewer record errors for operators, so the system is economically feasible.
+\subsection{Process Modelling}
 
-\subsection{Object Modelling}
+Process modelling illustrates how data moves through the system and how internal processes transform inputs into outputs.
 
-The system is designed with the object-oriented approach. Figure~\ref{fig:classdiagram} shows the class diagram, which describes the main classes of the system, their attributes and operations, and the relationships between them.
+\textbf{Level 1 Data Flow Diagram (DFD).} Figure~\ref{fig:level1dfd} shows the Level 1 DFD, detailing the core functional processes of the system including User Authentication, Trip Search, Seat Hold \& Allocation, Payment Processing, and Management Dashboards.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=\textwidth]{figures/class-diagram.pdf}
-	\caption{Class diagram of the bus ticket booking system}
-	\label{fig:classdiagram}
+	\includegraphics[width=\textwidth]{figures/level1-dfd.pdf}
+	\caption{Level 1 Data Flow Diagram of Nepal Bus Ticket Booking System}
+	\label{fig:level1dfd}
 \end{figure}
 
-\textbf{Users.} \textit{User} is an abstract class that holds the common account data and the register, login, and logout operations. \textit{Passenger}, \textit{Operator}, and \textit{Administrator} inherit from it and add the operations of their own role. A passenger searches for buses and makes and cancels bookings. An operator manages buses, trips, and fare rules and views reports. An administrator approves operators, manages users, and views all bookings and system reports.
+\subsection{Data Modelling}
 
-\textbf{Buses and trips.} An \textit{Operator} owns many \textit{Bus} objects, and each bus is composed of its \textit{Seat} objects. A \textit{Route} and a \textit{Bus} together define a \textit{Trip}, which has a departure time and a base fare. \textit{FareRule} lets an operator set special pricing, such as peak-season fares, for a route.
+Data modelling defines the logical data structures and entity relationships within the database.
 
-\textbf{Bookings and payments.} A \textit{Passenger} makes \textit{Booking} objects for a \textit{Trip}. A booking includes one or more \textit{BookingSeat} objects, each linking the booking to a seat and to the passenger's name. A booking can have \textit{Payment} objects, which store the eSewa transaction and its status. The \textit{Booking} class also carries the seat-locking operations: \texttt{holdSeats()} holds the selected seats for a limited time, and \texttt{releaseHold()} releases them when the time runs out without payment.
-
-% Object diagram: a sample booking shown with example objects
-\textbf{Object diagram.} Figure~\ref{fig:objectdiagram} shows an object diagram, which is a snapshot of the system with example objects. In it, the passenger Sita Sharma has made a confirmed booking for a Kathmandu to Pokhara trip operated by Sample Travels. The booking holds seat A1 of the bus. Its total of 1440 is the base fare of 1200 plus the 20 percent peak-season rule, and it is paid by one completed eSewa payment. The names and values are sample data.
+\textbf{Entity-Relationship Diagram (ERD).} Figure~\ref{fig:erd} illustrates the Entity-Relationship Diagram for the system. It models core entities—including \texttt{User}, \texttt{Bus}, \texttt{Route}, \texttt{Trip}, \texttt{Seat}, \texttt{Booking}, and \texttt{Payment}—along with their attributes, primary keys, foreign key constraints, and cardinalities.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=\textwidth]{figures/object-diagram.pdf}
-	\caption{Object diagram of a confirmed booking}
-	\label{fig:objectdiagram}
-\end{figure}
-
-\subsection{Dynamic Modelling}
-
-Dynamic modelling shows how the objects of the system change over time and how they work together. State diagrams show the states that one object passes through, and a sequence diagram shows the messages that are exchanged between the parts of the system during a scenario. This section gives a state diagram for a booking, a state diagram for a seat, and a sequence diagram for booking and paying for seats.
-
-\textbf{State diagram of a booking.} Figure~\ref{fig:bookingstate} shows the states of a \textit{Booking}. When a passenger selects seats, \texttt{holdSeats()} creates the booking in the \textit{Held} state, and the seats stay held until \texttt{holdExpiresAt}. A failed payment leaves the booking in the \textit{Held} state, so the passenger can try again. When the server verifies the payment, \texttt{confirm()} moves the booking to \textit{Confirmed}. If the hold time ends before the payment is completed, \texttt{releaseHold()} moves the booking to \textit{Expired} and releases the seats. A passenger can cancel a held booking, and can cancel a confirmed booking only if the cancellation rule allows it. In both cases \texttt{cancel()} moves the booking to \textit{Cancelled} and releases the seats. \textit{Expired} and \textit{Cancelled} are end states.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=\textwidth]{figures/booking-state-diagram.pdf}
-	\caption{State diagram of a booking}
-	\label{fig:bookingstate}
-\end{figure}
-
-\textbf{State diagram of a seat.} Figure~\ref{fig:seatstate} shows the state of one seat on one trip. A seat is \textit{Available} when the trip is scheduled. It becomes \textit{Held} when a passenger holds it with \texttt{holdSeats()}, and \textit{Booked} when the booking is confirmed. A held seat goes back to \textit{Available} when the hold ends with \texttt{releaseHold()} or when the booking is cancelled before payment, and a booked seat goes back to \textit{Available} when the booking is cancelled. The database allows only one passenger to hold a seat at a time, so a seat that is \textit{Held} or \textit{Booked} cannot be held by another passenger.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=\textwidth]{figures/seat-state-diagram.pdf}
-	\caption{State diagram of a seat}
-	\label{fig:seatstate}
-\end{figure}
-
-\textbf{Sequence diagram of booking and payment.} Figure~\ref{fig:bookingsequence} shows the messages exchanged between the passenger, the web application (Next.js), the server (NestJS), the database (PostgreSQL), and eSewa. After the passenger selects a trip and seats, the server calls \texttt{holdSeats()}. In one database transaction it locks the seat rows and checks that the seats are free. If they are free, the server saves the booking with the status held and the hold expiry time, and the passenger is shown the payment page. If the seats have already been taken, the passenger is asked to choose other seats.
-
-When the passenger confirms, the server saves a payment with the status pending and returns a signed payment request. The web application redirects the passenger to eSewa, where the passenger approves the payment, and eSewa redirects the passenger back with the payment result. The web application sends this result to the server, and the server does not trust it directly. It asks eSewa for the payment status. Only if the status is complete does the server update the payment, confirm the booking, and mark the seats as booked. Otherwise the payment is marked as failed and the booking stays held, so the passenger can retry until the hold ends. If the hold time ends without payment, the server calls \texttt{releaseHold()} and the seats become available again.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=\textwidth]{figures/booking-sequence-diagram.pdf}
-	\caption{Sequence diagram of booking and payment}
-	\label{fig:bookingsequence}
+	\includegraphics[width=\textwidth]{figures/erd-diagram.pdf}
+	\caption{Entity-Relationship Diagram (ERD) of the system}
+	\label{fig:erd}
 \end{figure}
 
 \section{High-Level Design}
 
-Figure~\ref{fig:architecture} shows the high-level design of the system. It has three layers and one external service. The web application, built with Next.js and Tailwind CSS, is what passengers, operators, and administrators use in a web browser. It sends requests to the server and shows the responses. The server, built with NestJS, holds the business logic: login and role-based access, bus, route, and trip management, search, booking with seat locking, fare rules, payment, and reports. It reads and writes all data in a PostgreSQL database, which supports the transactions and row-level locks that the seat-locking mechanism needs.
-
-Payment is handled by eSewa, which is outside the system. The server sends a payment request to eSewa and, after the passenger pays, asks eSewa for the payment status before it confirms a booking. The sequence diagram in Figure~\ref{fig:bookingsequence} shows how these parts work together during a booking.
+Figure~\ref{fig:architecture} presents the high-level system architecture structured in three main layers alongside an external payment integration.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=\textwidth]{figures/architecture-diagram.pdf}
-	\caption{High-level architecture of the system}
+	\caption{High-Level Architecture of the System}
 	\label{fig:architecture}
 \end{figure}
 
-\section{Algorithm Details}
-% Seat locking, merge sort, searching, fare calculation, password hashing
-[To be written]
+The web frontend (Next.js and Tailwind CSS) acts as the client layer for passengers, operators, and administrators. The backend server (NestJS) processes REST API requests, handles authentication, applies fare rules, manages seat locking logic, and communicates with PostgreSQL for database operations. Online payment verification is managed asynchronously via eSewa API calls.
