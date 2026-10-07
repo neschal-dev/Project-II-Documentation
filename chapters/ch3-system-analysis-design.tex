@@ -4,7 +4,23 @@
 \section{System Analysis}
 
 \subsection{Requirement Analysis}
-% A use-case diagram will be added here to illustrate the functional requirements.
+
+Figure~\ref{fig:usecasediagram} illustrates the use case diagram for the Nepal Bus Ticket Booking System. It defines the system boundary and models the functional requirements by showing how external actors interact with the primary features of the system.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth,height=0.72\textheight,keepaspectratio]{figures/usecase-diagram.png}
+	\caption{Use case diagram of the Nepal bus ticket booking system}
+	\label{fig:usecasediagram}
+\end{figure}
+
+The diagram identifies four primary actors and their interactions within the system:
+\begin{itemize}
+	\item \textbf{Passenger:} Interacts with the system to search for bus trips, select seats with temporary holds, initiate online payments, view booking confirmations, and request booking cancellations.
+	\item \textbf{Bus Operator:} Configures and manages fleet details, seat layouts, routes, travel schedules, dynamic peak fare rules, and views booking reports for their specific fleet.
+	\item \textbf{Administrator:} Governs system-level operations, including reviewing and approving new bus operators, managing user accounts, and accessing system-wide revenue and occupancy analytics.
+	\item \textbf{eSewa Gateway:} Acts as an external payment service integrated into the \textit{Make Online Payment} use case via an \texttt{<<include>>} relationship to verify transactions securely.
+\end{itemize}
 
 \textbf{i. Functional requirements}
 
@@ -131,20 +147,18 @@ When the passenger confirms, the server saves a payment with the status pending 
 	\label{fig:bookingsequence}
 \end{figure}
 
-\subsection{Process Modelling}
-% Activity diagram of the booking process
-[To be written]
+\section{High-Level Design}
 
-\section{System Design}
+Figure~\ref{fig:architecture} shows the high-level design of the system. It has three layers and one external service. The web application, built with Next.js and Tailwind CSS, is what passengers, operators, and administrators use in a web browser. It sends requests to the server and shows the responses. The server, built with NestJS, holds the business logic: login and role-based access, bus, route, and trip management, search, booking with seat locking, fare rules, payment, and reports. It reads and writes all data in a PostgreSQL database, which supports the transactions and row-level locks that the seat-locking mechanism needs.
 
-\subsection{Refinement of Classes and Objects}
-[To be written]
+Payment is handled by eSewa, which is outside the system. The server sends a payment request to eSewa and, after the passenger pays, asks eSewa for the payment status before it confirms a booking. The sequence diagram in Figure~\ref{fig:bookingsequence} shows how these parts work together during a booking.
 
-\subsection{Component Diagram}
-[To be written]
-
-\subsection{Deployment Diagram}
-[To be written]
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{figures/architecture-diagram.pdf}
+	\caption{High-level architecture of the system}
+	\label{fig:architecture}
+\end{figure}
 
 \section{Algorithm Details}
 % Seat locking, merge sort, searching, fare calculation, password hashing

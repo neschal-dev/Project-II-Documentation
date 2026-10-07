@@ -7,7 +7,7 @@
 
 The following tools are used to develop and manage the project.
 
-\textbf{CASE and development tools.} Visual Studio Code is the code editor. Claude is used as an AI assistant for design discussion, drafting, and review. Notion is used for project tracking and management. Git is used for version control, and the source code is hosted on GitHub.
+\textbf{CASE and development tools.} Visual Studio Code is the code editor. The state diagrams, the sequence diagram, and the architecture figure are drawn with Python (Matplotlib) scripts. Claude is used as an AI assistant for design discussion, drafting, and review. Notion is used for project tracking and management. Git is used for version control, and the source code is hosted on GitHub.
 
 \textbf{Programming languages and frameworks.} The system is written in TypeScript on Node.js. Next.js and Tailwind CSS are used for the front end, and NestJS is used for the back end.
 
@@ -25,17 +25,13 @@ The system is divided into the following modules, which follow the increments de
   \item \textit{Fare rules and reports:} special fare rules and reports on bookings, revenue, and seat occupancy.
 \end{enumerate}
 
-\section{Testing}
+\section{Testing Plan}
 
-The system will be tested as each increment is completed. The detailed test cases will be prepared during development and reported in the final report.
+The system will be tested as each increment is completed. The detailed test cases will be written during development and reported in the final report.
 
-\subsection{Test Cases for Unit Testing}
+\textbf{Unit testing.} Unit tests will cover the functions of each module, such as fare calculation, seat holding and release, sorting of search results, and password hashing.
 
-Unit tests will cover the functions of each module, such as fare calculation, seat holding and release, sorting of search results, and password hashing.
-
-\subsection{Test Cases for System Testing}
-
-System tests will follow the complete booking flow, from search to confirmed booking, including payment verification and cancellation. They will include a test with simultaneous requests for the same seat, to confirm that double booking does not occur.
+\textbf{System testing.} System tests will follow the complete booking flow, from search to confirmed booking, including payment verification and cancellation. They will include a test with simultaneous requests for the same seat, to confirm that double booking does not occur.
 
 \section{Project Schedule}
 % Gantt chart showing the project timeline

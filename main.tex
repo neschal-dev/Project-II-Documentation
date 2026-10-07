@@ -22,6 +22,7 @@
 % ---------- Spacing and alignment ----------
 \usepackage{setspace}
 \onehalfspacing
+\emergencystretch=2em
 \usepackage{enumitem}
 \setlist[enumerate]{itemsep=0pt, topsep=4pt}
 \setlength{\parindent}{0pt}
@@ -58,8 +59,8 @@
 \renewcommand{\cftchapfont}{\normalfont}
 \renewcommand{\cftchappagefont}{\normalfont}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
-\setlength{\cftbeforechapskip}{4pt}
-\setlength{\cftbeforesecskip}{2pt}
+\setlength{\cftbeforechapskip}{3pt}
+\setlength{\cftbeforesecskip}{1pt}
 \setlength{\cftsecindent}{1.5em}
 \setlength{\cftsecnumwidth}{2.5em}
 \setlength{\cftsubsecindent}{3.5em}
@@ -111,6 +112,13 @@
   \addcontentsline{toc}{chapter}{\MakeUppercase{#1}}%
   \begin{center}{\fontsize{16}{20}\selectfont\bfseries #1}\end{center}\vspace{6pt}}
 
+% Front-matter title that is NOT listed in the Table of Contents (certificate pages)
+\newcommand{\frontmattertitlenotoc}[1]{%
+  \begin{center}{\fontsize{16}{20}\selectfont\bfseries #1}\end{center}\vspace{6pt}}
+
+% List of Tables heading, styled like the Table of Contents heading
+\renewcommand{\listtablename}{\hfill List of Tables\hfill\mbox{}}
+
 \begin{document}
 
 % ---------- Front matter (roman page numbers start inside certificate.tex) ----------
@@ -123,9 +131,13 @@
 \clearpage
 \begingroup\singlespacing\tableofcontents\endgroup
 
-% ---------- 6. Lists (turn on once you have figures/tables/abbreviations) ----------
-% \clearpage \listoffigures
-% \clearpage \listoftables
+% ---------- 6. Lists: abbreviations (full-form table), then tables ----------
+\input{frontmatter/abbreviations}
+
+\clearpage
+\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\begingroup\singlespacing\listoftables\endgroup
+% \clearpage \listoffigures   % add later if required
 
 % ---------- Main report: arabic page numbers from 1 ----------
 \clearpage
